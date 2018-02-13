@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Business Hours plugin for jQuery &ndash; Demos and Documentation</title>
+    <meta name="description" content="Business hours jQuery plugin."/>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-json/2.6.0/jquery.json.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css"/>
+    
+    <script type="text/javascript" src="jquery.businessHours.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery.businessHours.css"/>
+    <link rel="stylesheet" type="text/css" href="libs/page.css"/>
+
+    <!-- START COPYING HERE -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.1/gh-fork-ribbon.min.css">
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.0/gh-fork-ribbon.ie.min.css">
+    <![endif]-->
+    <!-- END COPYING HERE -->
+</head>
+<body>
+    <div id="container" class="container">
+
+        <div>
+            <h3>Using bootstrap, font-awesome and timepicker</h3>
+            <div id="businessHoursContainer3"></div>
+            <div class="clean"></div>
+            <div style="margin-top: 10px;">
+                <button id="btnSerialize2" type="button" class="btn btn-primary">Serialize</button>
+                <textarea id="businessHoursOutput3" rows="8" cols="80" display="false"></textarea>
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        (function() {
+
+            var b3 = $("#businessHoursContainer3");
+            var businessHoursManagerBootstrap = b3.businessHours({
+                postInit:function(){
+                    b3.find('.operationTimeFrom, .operationTimeTill').timepicker({
+                        'timeFormat': 'H:i',
+                        'step': 15
+                    });
+                },
+                dayTmpl: '<div class="dayContainer" style="width: 80px;">' +
+                        '<div data-original-title="" class="colorBox"><input type="checkbox" class="invisible operationState"/></div>' +
+                        '<div class="weekday"></div>' +
+                        '<div class="operationDayTimeContainer">' +
+                        '<div class="operationTime input-group"><span class="input-group-addon"><i class="fa fa-sun-o"></i></span><input type="text" name="startTime" class="mini-time form-control operationTimeFrom" value=""/></div>' +
+                        '<div class="operationTime input-group"><span class="input-group-addon"><i class="fa fa-moon-o"></i></span><input type="text" name="endTime" class="mini-time form-control operationTimeTill" value=""/></div>' +
+                        '</div></div>'
+            });
+            $("#btnSerialize2").click(function() {
+                $("#businessHoursOutput3").val(JSON.stringify(businessHoursManagerBootstrap.serialize()));
+            });
+        })();
+    </script>
+</body>
+</html>
